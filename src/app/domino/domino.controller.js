@@ -12,6 +12,8 @@
         
         function onInit() {
             vm.degree = 0;
+            vm.size = 50;
+            vm.speed = 50;
         }
 
     }
