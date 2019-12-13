@@ -10,6 +10,7 @@
 }
 
 .domino-wrapper{
+  margin: 10px;
   width: 280px;
   height: 250px;
   display: flex;
