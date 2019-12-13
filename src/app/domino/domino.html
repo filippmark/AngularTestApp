@@ -1,0 +1,13 @@
+<div >
+    <div> 
+        <button ng-click="vm.degree = vm.degree - 90"> Rotate counter clock-wise </button>
+        <button > New dominos </button>
+        <button ng-click="vm.degree = vm.degree + 90"> Rotate clock-wise </button>
+    </div>
+    <div rotate="vm.degree">
+        Domino
+    </div>
+    <pre> 
+        {{ vm | json}}
+    </pre>
+</div>

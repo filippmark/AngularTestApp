@@ -12,18 +12,18 @@
                     pageTitle: 'Home'
                 }
             }, {
-                name: 'albums',
-                url: '/albums',
-                template: '<albums></albums>',
+                name: 'domino',
+                url: '/domino',
+                template: '<domino> </domino>',
                 data: {
-                    pageTitle: 'Albums'
+                    pageTitle: 'Domino'
                 }
-            }, {
-                name: 'posts',
-                url: '/posts',
-                template: '<posts></posts>',
+            },{
+                name: 'school-gpa',
+                url: '/school-gpa',
+                template: '<school-gpa> </school-gpa>',
                 data: {
-                    pageTitle: 'Posts'
+                    pageTitle: 'School Gpa'
                 }
             }];
             states.forEach(state => {
