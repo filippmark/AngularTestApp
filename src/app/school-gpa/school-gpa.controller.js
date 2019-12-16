@@ -1,12 +1,13 @@
 (() => {
   angular.module("app").controller("SchoolGpaController", SchoolGpaController);
 
-  function SchoolGpaController($scope, $timeout) {
+  function SchoolGpaController($scope, $timeout, schoolGpaService) {
     const vm = this;
     vm.$onInit = onInit;
     vm.header = "SchoolGpa";
 
     function onInit() {
+      console.log(schoolGpaService);
       vm.grades = [];
       vm.student = {
         name: "",
@@ -132,5 +133,6 @@
       let tab = angular.element(document.querySelector(`#tab${id}`));
       tab[0].style.borderBottom = "none";
     }
+
   }
 })();
