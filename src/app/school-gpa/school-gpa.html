@@ -8,7 +8,7 @@
     <ul class="grads-list">
       <li>
         <ul class='schoolGPA-grads'>
-          <li remove-border-on-click={{vm.grades[vm.currentGrade]}} tab-id={{grade.id}}  class="grad-tab" ng-repeat="grade in vm.grades" ng-click="vm.chooseGrade(grade)">
+          <li id="{{'tab' + grade.id}}"  class="grad-tab" ng-repeat="grade in vm.grades track by grade.id" ng-click="vm.chooseGrade(grade)">
             GRADE {{grade.name}}
             <button class="delGrade" ng-click="vm.removeGrade(grade)">
                 ×
@@ -39,11 +39,13 @@
       </li>
       <li class="students" >
         <ul class="students-list">
-            <ul class="student-results" ng-repeat="student in vm.grades[vm.currentGrade].students">
-              <li class="student-name" ng-bind="::student.name">
+            <ul class="student-results" ng-repeat="student in vm.grades[vm.currentGrade].students track by student.id">
+              <li class="student-name" >
+                {{::student.name}}
               </li>
               <li class="spacer"></li>
-              <li class="student-mark" ng-bind="::student.mark | number : 2">
+              <li class="student-mark">
+                {{::student.mark | number : 2}}
               </li>
               <li class="spacer"></li>
               <li>
@@ -55,12 +57,14 @@
         </ul>
       </li>
     </ul>
-    <form class="addStudent" novalidate>
-      <input type="text" placeholder="Name"  minlength="2" ng-model="vm.student.name" required>
-      <input type="text" placeholder="GPA" minlength="1" ng-model="vm.student.mark"required>      
-      <button ng-click="vm.addStudent(vm.student)">
+    <form class="addStudent" novalidate name="studentRes">
+      <input name="name" type="text" placeholder="Name"  minlength="2" ng-model="vm.student.name" ng-pattern="/^[A-Za-z]*$/" required>
+      <input name="mark" type="text" placeholder="GPA" minlength="1" ng-model="vm.student.mark" ng-pattern="/^[+-]?\d+(\.\d+)?$/" required>      
+      <button ng-click="vm.addStudent(vm.student)" ng-disabled="studentRes.$invalid">
         Add
       </button>
+      <pre>
+      </pre>
     </form>
   </div>
 </div>

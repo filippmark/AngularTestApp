@@ -7,6 +7,9 @@
     function rotate() {
         return {
             restrict: "A",
+            scope:{
+                degree: "=rotate"
+            },
             link: function(scope, element, attr) {
                 scope.$watch('degree', function(newVal, oldVal) {
                     if (newVal !== oldVal)

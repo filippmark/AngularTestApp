@@ -1,27 +1,29 @@
-<div>
+<div class="domino-layout">
 
     <div> 
-        <button ng-click="vm.degree = vm.degree - 90"> Rotate counter clock-wise </button>
+        <button ng-click="vm.degree = vm.degree - 90">  Rotate counter clock-wise </button>
         <button ng-click="vm.updateFaces()"> New dominos </button>
         <button ng-click="vm.degree = vm.degree + 90"> Rotate clock-wise </button>
     </div>
     
     
     <div class="domino-wrapper">
-        <div rotate="vm.degree" change-size="vm.size"  change-rotation-speed="vm.speed" class="domino">
+        <div rotate="vm.degree" class="domino">
             <div class="domino-part" change-domino-face="vm.topPartOfDomino">
             </div>
             <div class="domino-part" change-domino-face="vm.bottomPartOfDomino">
             </div>
         </div>
     </div>
+
     <div class="domino-controls">
-        <label for="size"> size </label>
-        <input name="size" type="range" ng-model="vm.size" min="50" max="100">
-        <label for="size"> speed </label>
-        <input name="speed" type="range" ng-model="vm.speed" min="0" max="80">
+        <div class="control" >
+            <label for="size"> Size </label>
+            <input name="size" type="range" ng-model="vm.size" ng-change="vm.changeSize()" min="50" max="100">
+        </div>
+        <div class="control">
+            <label for="size"> Speed </label>
+            <input name="speed" type="range" ng-model="vm.speed" ng-change="vm.changeSpeed()" min="0" max="80">
+        </div>
     </div>
-    <pre> 
-        {{ vm | json}}
-    </pre>
 </div>

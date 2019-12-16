@@ -10,14 +10,16 @@
             templateUrl: "app/domino/dominoFaces.html",
             link: function(scope, element, attr) {
                 scope.$watch(attr.changeDominoFace, function(newVal, oldVal) {
-                    appendFace(newVal, element, $templateCache, scope);
-                    if(newVal != oldVal)
+                    if(newVal !== oldVal)
                     {
-                        var child = element[0].lastElementChild;  
+                        let child = element[0].lastElementChild;  
                         while (child) { 
                             element[0].removeChild(child); 
                             child = element[0].lastElementChild; 
                         }
+                        appendFace(newVal, element, $templateCache, scope);
+                    }
+                    else if(newVal === oldVal){
                         appendFace(newVal, element, $templateCache, scope);
                     }
                 });
