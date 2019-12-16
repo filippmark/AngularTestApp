@@ -7,16 +7,16 @@
     vm.header = "SchoolGpa";
 
     function onInit() {
-      console.log(schoolGpaService);
-      vm.grades = [];
+      vm.grades = schoolGpaService.grades;
       vm.student = {
         name: "",
         mark: ""
       };
       vm.grade = "";
 
-      vm.currentGrade = 0;
-      vm.previousGrade = 0;
+      vm.currentGrade = schoolGpaService.currentGrade;
+      vm.previousGrade = schoolGpaService.previousGrade;
+      vm.averageGPA = schoolGpaService.averageGPA;
 
       vm.addStudent = addStudent;
       vm.removeStudent = removeStudent;
@@ -28,7 +28,7 @@
       vm.removeBorder = removeBorderFromTab;
 
       $scope.$watchCollection("vm.grades", (newVal, oldVal) => {
-        vm.averageGPA = calculateAverageGPA();
+        vm.averageGPA = schoolGpaService.calculateAverageGPA();
       });
     }
 
@@ -37,51 +37,41 @@
         name: "",
         mark: ""
       };
-      vm.grades.push({
-        students: [],
-        name: "",
-        id: new Date().getTime()
-      });
-      vm.previousGrade = vm.currentGrade;
-      vm.currentGrade = vm.grades.length - 1;
+
+      schoolGpaService.addNewGrade();
+
+     vm.currentGrade = schoolGpaService.currentGrade;
+     vm.previousGrade = schoolGpaService.previousGrade;
+     
 
       $timeout(vm.removeBorder, 0);
     }
 
     function addStudent(student) {
-      let copyStudent = {};
-
-      angular.copy(student, copyStudent);
-
-      copyStudent.mark = parseFloat(copyStudent.mark);
-      copyStudent.id = new Date().getTime();
-
-      vm.grades[vm.currentGrade].students.push(copyStudent);
+      schoolGpaService.addStudent(student);
+    
+      vm.averageGPA = schoolGpaService.averageGPA;
 
       vm.student = {
         name: "",
         mark: ""
       };
-
-      vm.averageGPA = calculateAverageGPA();
     }
 
     function removeStudent(student) {
-      const index = vm.grades[vm.currentGrade].students.findIndex(
-        searchById,
-        student
-      );
-
-      vm.grades[vm.currentGrade].students.splice(index, 1);
-
-      vm.averageGPA = calculateAverageGPA();
+      schoolGpaService.removeStudent(student);
+      vm.averageGPA = schoolGpaService.averageGPA;
     }
 
     function chooseGrade(grade) {
-      const index = vm.grades.findIndex(searchById, grade);
-      if (vm.currentGrade !== index) {
-        vm.previousGrade = vm.currentGrade;
-        vm.currentGrade = index;
+      const index = schoolGpaService.grades.findIndex(searchById, grade);
+      if (schoolGpaService.currentGrade !== index) {
+        schoolGpaService.previousGrade = schoolGpaService.currentGrade;
+        schoolGpaService.currentGrade = index;
+
+        vm.currentGrade = schoolGpaService.currentGrade;
+        vm.previousGrade = schoolGpaService.previousGrade;
+
         vm.student = {
           name: "",
           mark: ""
@@ -90,46 +80,36 @@
       }
     }
 
+    function searchById(element, index, array) {
+        if (this.id === element.id) {
+          return true;
+        }
+        return false;
+      }
+
     function removeGrade(grade) {
-      const index = vm.grades.findIndex(searchById, grade);
-        
-      vm.grades.splice(index, 1);
+      schoolGpaService.removeGrade(grade);
+
+      vm.currentGrade = schoolGpaService.currentGrade;
+      vm.previousGrade = schoolGpaService.previousGrade;
+    
+      vm.averageGPA = schoolGpaService.averageGPA;
 
       if (vm.grades.length > 0) {
-        vm.currentGrade = 0;
         vm.removeBorder();
       }
     }
 
-    function searchById(element, index, array) {
-      if (this.id === element.id) {
-        return true;
-      }
-      return false;
-    }
 
-    function calculateAverageGPA() {
-      let allSum = 0;
-      let studentsAmount = 0;
-      vm.grades.forEach((value, key) => {
-        value.students.forEach((value, key) => {
-          allSum = allSum + value.mark;
-        });
-
-        studentsAmount = studentsAmount + value.students.length;
-      });
-      if (studentsAmount > 0) return allSum / studentsAmount;
-      return 0;
-    }
 
     function removeBorderFromTab() {
-      if(angular.isDefined(vm.grades[vm.previousGrade])){
-        const prevId = vm.grades[vm.previousGrade].id;
+      if(angular.isDefined(vm.grades[schoolGpaService.previousGrade])){
+        const prevId = vm.grades[schoolGpaService.previousGrade].id;
         let oldTab = angular.element(document.querySelector(`#tab${prevId}`));
         oldTab[0].style.borderBottom = "1px solid black";
       }
       
-      const id = vm.grades[vm.currentGrade].id;
+      const id = vm.grades[schoolGpaService.currentGrade].id;
       let tab = angular.element(document.querySelector(`#tab${id}`));
       tab[0].style.borderBottom = "none";
     }

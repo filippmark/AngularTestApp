@@ -1,0 +1,104 @@
+.schoolGPA-layout {
+  height: 550px;
+  width: 70%;
+  margin: 10px auto;
+  background: #e0d7d7;
+}
+
+.schoolGPA-grads {
+  list-style: none;
+  display: flex;
+  padding: 0px;
+}
+
+.grad-tab {
+  max-height: 25px;
+  padding-top: 7px;
+  padding-left: 2px;
+  min-width: 100px;
+  max-width: 200px;
+  overflow: hidden;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.grads-list {
+  list-style: none;
+  padding: 5px 5px;
+  overflow: auto;
+}
+
+.delGrade {
+  border: none;
+  background: inherit;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.grads-list {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.averageMark-layout {
+  text-align: end;
+  height: 30px;
+}
+
+.addGrade {
+  height: 30px;
+  width: 30px;
+  background: inherit;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.grad-details {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.gradName {
+  margin-bottom: 10px;
+}
+
+.grad-students {
+  list-style: none;
+  padding: 0;
+}
+
+.removeStudentFromList {
+  border: none;
+  background: inherit;
+  cursor: pointer;
+}
+
+.students-list {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  min-height: 300px;
+  list-style: none;
+  padding: 0;
+  overflow: auto;
+}
+
+.students-list-description {
+  display: flex;
+  list-style: none;
+  padding: 0px;
+}
+
+.student-results {
+  display: flex;
+  list-style: none;
+  padding: 0px;
+}
+
+
+
+.student-name, .student-mark{
+    width: 25%;
+}

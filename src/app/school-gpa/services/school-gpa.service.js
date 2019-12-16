@@ -21,7 +21,9 @@
       addStudent,
       removeStudent,
 
-      calculateAverageGPA
+      calculateAverageGPA,
+      
+      searchById
     };
 
     function addNewGrade() {
