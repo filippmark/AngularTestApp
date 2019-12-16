@@ -1,6 +1,66 @@
-<div>
-    <h1>{{ vm.header }}</h1>
+<div class='schoolGPA-layout'>
+  <div class="averageMark-layout">
+    <div class="mark">
+      {{vm.averageGPA  | number : 2}}
+    </div>
   </div>
-  <div ng-repeat="post in vm.posts">
-    <item item="post"></item>
+  <div class="schoolGpa">
+    <ul class="grads-list">
+      <li>
+        <ul class='schoolGPA-grads'>
+          <li remove-border-on-click={{vm.grades[vm.currentGrade]}} tab-id={{grade.id}}  class="grad-tab" ng-repeat="grade in vm.grades" ng-click="vm.chooseGrade(grade)">
+            GRADE {{grade.name}}
+            <button class="delGrade" ng-click="vm.removeGrade(grade)">
+                ×
+            </button>
+          </li>
+        </ul>    
+      </li>
+      <li>
+        <button ng-click="vm.addNewGrade()" class="addGrade">
+          +
+        </button>
+      </li>
+    </ul>   
   </div>
+  <div class="grad-details" ng-if="vm.grades.length > 0">
+    <div class="gradName">
+      <label for="grade"> GRADE </label>
+      <input type="text" name="grade" ng-model="vm.grades[vm.currentGrade].name">
+    </div>
+    <ul class="grad-students">
+      <li>
+        <ul class="students-list-description">
+          <li> Name </li>
+          <li class="spacer"></li>
+          <li> GPA </li>
+          <li class="spacer"></li>
+        </ul>
+      </li>
+      <li class="students" >
+        <ul class="students-list">
+            <ul class="student-results" ng-repeat="student in vm.grades[vm.currentGrade].students">
+              <li class="student-name" ng-bind="::student.name">
+              </li>
+              <li class="spacer"></li>
+              <li class="student-mark" ng-bind="::student.mark | number : 2">
+              </li>
+              <li class="spacer"></li>
+              <li>
+                <button ng-click="vm.removeStudent(student)" class="removeStudentFromList">
+                  x
+                </button>
+              </li>
+            </ul>
+        </ul>
+      </li>
+    </ul>
+    <form class="addStudent" novalidate>
+      <input type="text" placeholder="Name"  minlength="2" ng-model="vm.student.name" required>
+      <input type="text" placeholder="GPA" minlength="1" ng-model="vm.student.mark"required>      
+      <button ng-click="vm.addStudent(vm.student)">
+        Add
+      </button>
+    </form>
+  </div>
+</div>

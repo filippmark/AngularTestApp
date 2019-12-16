@@ -1,7 +1,7 @@
 // app.debug.js
 (() => {
 
-    angular.module('app')
+    /*angular.module('app')
 
         .run(debuggingBorder => {
             if (debuggingBorder) {
@@ -24,5 +24,5 @@
                 }
             }
         });
-
+*/
 })();
